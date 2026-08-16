@@ -9,6 +9,7 @@ import shutil
 from functools import partial
 from toolz import compose,compose_left
 import unicodedata
+import pprint
 
 
 
@@ -25,6 +26,7 @@ class Classe_criador_chunks() :
         self.criacao_chunks()
         self.busca_semantica()
         self.busca_lexica()
+        self.listagem_contexto()
 
 
     def normalizar_texto(self,texto=None):
@@ -107,7 +109,7 @@ class Classe_criador_chunks() :
             scores.append({"Chunk":self.frame_chunks.loc[i,"Chunk"],"Valor":val_max})
         frame_scores = pd.DataFrame(scores)
         frame_rela01 = pd.merge(self.frame_chunks,frame_scores,left_on="Chunk",right_on="Chunk",suffixes=("_x","_y"),how="left")
-        frame_rela01 = frame_rela01.sort_values(by="Valor",ascending=False).reset_index(drop=True).head(20)
+        frame_rela01 = frame_rela01.sort_values(by="Valor",ascending=False).reset_index(drop=True).head(10)
         self.frame_rela02 = frame_rela01.copy()
         print(frame_rela01)
 
@@ -122,9 +124,39 @@ class Classe_criador_chunks() :
                 lista_final.append({"Chunk":self.frame_rela02.loc[i,"Chunk"],"Intencidade":len(lemma_q.intersection(lemma_chun)),"Similaridade":lemma_q.intersection(lemma_chun),"Menssagem":chunk_ref,"Referencia_Vetorial":self.frame_rela02.loc[i,"Valor"]})
         frame_final_cor = pd.DataFrame(lista_final)
         frame_final_cor = frame_final_cor.sort_values(by="Intencidade",ascending=False).reset_index(drop=True)
+        self.frame_final_0 = frame_final_cor.copy()
         print(frame_final_cor)
 
-            
+
+
+    def listagem_contexto(self) :
+        lista_final = []
+        for i , chunk_ref in enumerate(self.frame_final_0["Chunk"]) :
+            if chunk_ref == 1 :
+                lista_final.append({
+                    "Chunk":chunk_ref
+                })
+                lista_final.append({
+                    "Chunk":chunk_ref + 1
+                })
+            else :
+                lista_final.append({
+                    "Chunk":chunk_ref - 1
+                })
+                lista_final.append({
+                    "Chunk":chunk_ref 
+                })
+                lista_final.append({
+                    "Chunk":chunk_ref + 1
+                })
+        frame_chunks_ref = pd.DataFrame(lista_final)
+        frame_chunks_ref = frame_chunks_ref.drop_duplicates(subset="Chunk").reset_index(drop=True)
+        frame_chunks_ref = frame_chunks_ref.sort_values(by="Chunk").reset_index(drop=True)
+        frame_chunks_ref1 = pd.merge(frame_chunks_ref,self.frame_chunks,left_on="Chunk",right_on="Chunk",suffixes=("_x","_y"),how="left")
+        frame_chunks_refj = frame_chunks_ref1.to_json(orient="records",force_ascii=False,indent=4)
+        frame_chunks_ref1.to_json(r".\logs\modelo_js.json",orient="records",force_ascii=False,indent=4)
+        pprint.pprint(frame_chunks_refj)
+
 
         
 
