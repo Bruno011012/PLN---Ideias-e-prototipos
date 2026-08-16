@@ -1,0 +1,151 @@
+# ============================================================
+# PYTHON
+# ============================================================
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos compilados
+*.pyo
+*.pyd
+
+# Ambiente virtual Python
+testes/
+venv/
+.venv/
+env/
+ENV/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+
+# Variáveis de ambiente
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# ============================================================
+# VARIÁVEIS DE AMBIENTE / CREDENCIAIS
+# ============================================================
+
+.env
+.env.*
+!.env.example
+
+# Chaves e certificados
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Arquivos de credenciais
+credentials.json
+token.json
+secrets.json
+service-account.json
+
+# ============================================================
+# JUPYTER
+# ============================================================
+
+.ipynb_checkpoints/
+
+# ============================================================
+# IDE / EDITORES
+# ============================================================
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+.idea/
+*.code-workspace
+
+# ============================================================
+# SISTEMA OPERACIONAL
+# ============================================================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# ============================================================
+# LOGS
+# ============================================================
+
+*.log
+logs/
+
+# ============================================================
+# TESTES / COBERTURA
+# ============================================================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# ============================================================
+# BUILD / DISTRIBUIÇÃO
+# ============================================================
+
+build/
+dist/
+*.egg-info/
+
+# ============================================================
+# DADOS TEMPORÁRIOS
+# ============================================================
+
+tmp/
+temp/
+*.tmp
+
+# ============================================================
+# BANCO DE DADOS LOCAL
+# ============================================================
+
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================================
+# ARQUIVOS GRANDES / DADOS DE MACHINE LEARNING
+# ============================================================
+
+# Dados
+data/
+datasets/
+
+# Modelos treinados
+models/
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+
+# ============================================================
+# SAÍDAS DE EXPERIMENTOS
+# ============================================================
+
+outputs/
+results/
+simulacoes/
